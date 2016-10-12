@@ -11,6 +11,16 @@ namespace Zebra.VMI.Report.Bll
 {
     public class VMIOutboundReportBll
     {
+        public void GetNewOrders()
+        {
+            VMIOutboundReportDal dal = new VMIOutboundReportDal();
+            dal.GetNewOrders();
+        }
+        public void UpdateReport()
+        {
+            VMIOutboundReportDal dal = new VMIOutboundReportDal();
+            dal.UpdateReport();
+        }
         private void GetEntity(OutboundReport model, DataRow dr)
         {
             model.Id = dr["Id"].ToString();

@@ -46,5 +46,14 @@ namespace Zebra.VMI.Report.Dal
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
+
+        public void GetNewOrders()
+        {
+            DbHelperSQL.ExecuteSql("EXEC GetNewOutboundOrders");
+        }
+        public void UpdateReport()
+        {
+            DbHelperSQL.ExecuteSql("EXEC UPDATEOUTBOUNDREPORT");
+        }
     }
 }

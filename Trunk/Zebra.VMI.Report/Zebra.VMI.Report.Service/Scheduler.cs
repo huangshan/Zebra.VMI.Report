@@ -75,7 +75,8 @@ namespace Zebra.VMI.Report.Service
             {
                 while (true)
                 {
-
+                    Outbound outbound = new Outbound();
+                    outbound.Run();
                     Thread.Sleep(Convert.ToInt32(_sleepTime) * 1000);
                 }
             }

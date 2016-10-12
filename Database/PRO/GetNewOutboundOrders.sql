@@ -31,8 +31,8 @@ BEGIN
 	@STARTTIME DATETIME = DATEADD(DAY, -1, GETDATE());
 	select top 1 @STARTTIME=intoDate from VMI_OutboundReport where intoDate>@STARTTIME order by intoDate desc;
 
-	insert into VMI_OutboundReport (id, slcode, shiptitle, slarea, supin, sucode, status, intodate) 
-	select REPLACE (newid(), '-' , ''), sl.slcode, sl.shiptitle, sl.slarea, sl.supin, u.sucode, sl.status, sl.intodate
+	insert into VMI_OutboundReport (id, slcode, shiptitle, slarea, supin, sucode, status, intodate, addtime) 
+	select REPLACE (newid(), '-' , ''), sl.slcode, sl.shiptitle, sl.slarea, sl.supin, u.sucode, sl.status, sl.intodate, getdate()
 	from osshiplist_pre sl
 	inner join osShipUser u on sl.supin=u.supin
 	where intodate>@STARTTIME and slarea in ('HKH')
