@@ -1,0 +1,1 @@
+*.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo *.rej *~ #*# .#* .*.swp .DS_Store [Bb]in [Oo]bj [Rr]elease [Dd]ebug *.suo *.err *.log *.obj *.bin *.exe *[p]db *.zip *.force *.cache *.txt *.apk *.mdb zh-CN *.cache *.user
