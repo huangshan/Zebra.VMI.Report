@@ -5,12 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zebra.VMI.Report.Common;
+using Zebra.VMI.Report.Common.Model;
 using Zebra.VMI.Report.Dal;
 
 namespace Zebra.VMI.Report.Bll
 {
     public class VMIOutboundReportBll
     {
+        public List<OutboundReport> GetByStartTime(DateTime startTime)
+        {
+            VMIOutboundReportDal da = new VMIOutboundReportDal();
+            string strWhere = "intodate > '"+startTime.ToString()+"'";
+            DataSet ds = da.Get(strWhere);
+            if (ds == null || ds.Tables.Count == 0) return null;
+            List<OutboundReport> list = new List<OutboundReport>();
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                OutboundReport entity = new OutboundReport();
+                GetEntity(entity, row);
+                list.Add(entity);
+            }
+            return list;
+        }
         public void GetNewOrders()
         {
             VMIOutboundReportDal dal = new VMIOutboundReportDal();
@@ -21,34 +37,34 @@ namespace Zebra.VMI.Report.Bll
             VMIOutboundReportDal dal = new VMIOutboundReportDal();
             dal.UpdateReport();
         }
-        private void GetEntity(OutboundReport model, DataRow dr)
+        private void GetEntity(OutboundReport entity, DataRow dr)
         {
-            model.Id = dr["Id"].ToString();
-            model.slCode = dr["slCode"].ToString();
-            model.shipTitle = dr["shipTitle"].ToString();
-            model.slArea = dr["slArea"].ToString();
-            model.suPin = dr["suPin"].ToString();
-            model.suCode = dr["suCode"].ToString();
-            model.status = dr["status"].ToString();
-            model.intoDate = Convert.IsDBNull(dr["intoDate"]) ? DateTime.MinValue : Convert.ToDateTime(dr["intoDate"]);
-            model.slAAECode = dr["slAAECode"].ToString();
-            model.slDate = Convert.IsDBNull(dr["slDate"]) ? DateTime.MinValue : Convert.ToDateTime(dr["slDate"]);
-            model.slFlag = Convert.IsDBNull(dr["slFlag"]) ? 0 : Convert.ToInt32(dr["slFlag"]);
-            model.NewOrder = dr["NewOrder"].ToString();
-            model.IsPacked = dr["IsPacked"].ToString();
-            model.PackedTime = Convert.IsDBNull(dr["PackedTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["PackedTime"]);
-            model.PackedWeight = Convert.IsDBNull(dr["PackedWeight"]) ? 0 : Convert.ToDecimal(dr["PackedWeight"]);
-            model.IsCz = dr["IsCz"].ToString();
-            model.CzTime = Convert.IsDBNull(dr["CzTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["CzTime"]);
-            model.CzWeight = Convert.IsDBNull(dr["CzWeight"]) ? 0 : Convert.ToDecimal(dr["CzWeight"]);
-            model.ShipWeight = Convert.IsDBNull(dr["ShipWeight"]) ? 0 : Convert.ToDecimal(dr["ShipWeight"]);
-            model.RealWeight = Convert.IsDBNull(dr["RealWeight"]) ? 0 : Convert.ToDecimal(dr["RealWeight"]);
-            model.ChargeWeight = Convert.IsDBNull(dr["ChargeWeight"]) ? 0 : Convert.ToDecimal(dr["ChargeWeight"]);
-            model.IsPayment = dr["IsPayment"].ToString();
-            model.IsOutbound = dr["IsOutBound"].ToString();
-            model.OutboundTime = Convert.IsDBNull(dr["OutBoundTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["OutBoundTime"]);
-            model.OutboundWeight = Convert.IsDBNull(dr["OutBoundWeight"]) ? 0 : Convert.ToDecimal(dr["OutBoundWeight"]);
-            model.AddTime = Convert.IsDBNull(dr["AddTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["AddTime"]);
+            entity.Id = dr["Id"].ToString();
+            entity.slCode = dr["slCode"].ToString();
+            entity.shipTitle = dr["shipTitle"].ToString();
+            entity.slArea = dr["slArea"].ToString();
+            entity.suPin = dr["suPin"].ToString();
+            entity.suCode = dr["suCode"].ToString();
+            entity.status = dr["status"].ToString();
+            entity.intoDate = Convert.IsDBNull(dr["intoDate"]) ? DateTime.MinValue : Convert.ToDateTime(dr["intoDate"]);
+            entity.slAAECode = dr["slAAECode"].ToString();
+            entity.slDate = Convert.IsDBNull(dr["slDate"]) ? DateTime.MinValue : Convert.ToDateTime(dr["slDate"]);
+            entity.slFlag = Convert.IsDBNull(dr["slFlag"]) ? 0 : Convert.ToInt32(dr["slFlag"]);
+            entity.NewOrder = dr["NewOrder"].ToString();
+            entity.IsPacked = dr["IsPacked"].ToString();
+            entity.PackedTime = Convert.IsDBNull(dr["PackedTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["PackedTime"]);
+            entity.PackedWeight = Convert.IsDBNull(dr["PackedWeight"]) ? 0 : Convert.ToDecimal(dr["PackedWeight"]);
+            entity.IsCz = dr["IsCz"].ToString();
+            entity.CzTime = Convert.IsDBNull(dr["CzTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["CzTime"]);
+            entity.CzWeight = Convert.IsDBNull(dr["CzWeight"]) ? 0 : Convert.ToDecimal(dr["CzWeight"]);
+            entity.ShipWeight = Convert.IsDBNull(dr["ShipWeight"]) ? 0 : Convert.ToDecimal(dr["ShipWeight"]);
+            entity.RealWeight = Convert.IsDBNull(dr["RealWeight"]) ? 0 : Convert.ToDecimal(dr["RealWeight"]);
+            entity.ChargeWeight = Convert.IsDBNull(dr["ChargeWeight"]) ? 0 : Convert.ToDecimal(dr["ChargeWeight"]);
+            entity.IsPayment = dr["IsPayment"].ToString();
+            entity.IsOutbound = dr["IsOutBound"].ToString();
+            entity.OutboundTime = Convert.IsDBNull(dr["OutBoundTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["OutBoundTime"]);
+            entity.OutboundWeight = Convert.IsDBNull(dr["OutBoundWeight"]) ? 0 : Convert.ToDecimal(dr["OutBoundWeight"]);
+            entity.AddTime = Convert.IsDBNull(dr["AddTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["AddTime"]);
         }
     }
 }

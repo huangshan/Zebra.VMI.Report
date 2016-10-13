@@ -35,7 +35,7 @@ BEGIN
 	select REPLACE (newid(), '-' , ''), sl.slcode, sl.shiptitle, sl.slarea, sl.supin, u.sucode, sl.status, sl.intodate, getdate()
 	from osshiplist_pre sl
 	inner join osShipUser u on sl.supin=u.supin
-	where intodate>@STARTTIME and slarea in ('HKH')
-	and u.suCode in (select sucode from vmi_customerwhitelist where enable='Y' and starttime<@STARTTIME)
+	where intodate>@STARTTIME
+	and slarea in ('HKH') and u.suCode in (select sucode from vmi_customerwhitelist where enable='Y' and starttime<@STARTTIME)
 END;
 GO

@@ -1,0 +1,121 @@
+﻿@using Zebra.VMI.Report.Common
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active">出库查询</li>
+</ol>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>出库单号</th>
+            <th>客编</th>
+            <th>仓库</th>
+            <th>时间</th>
+            <th>预报状态</th>
+            <th>WMS同步</th>
+            <th>打包</th>
+            <th>称重</th>
+            <th>扣款</th>
+            <th>出库</th>
+            <th>发货</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (OutboundReport i in ViewBag.Items)
+        {
+            <tr>
+                <td>@i.shipTitle</td>
+                <td>@i.suCode</td>
+                <td>@i.slArea</td>
+                <td>@i.intoDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>
+                    @if (i.status == "1")
+                    {<span>生成订单</span>}
+                    @if (i.status == "5")
+                    {<span>未审单</span>}
+                    @if (i.status == "6")
+                    {<span>已审单</span>}
+                    @if (i.status == "C")
+                    {<span>订单取消</span>}
+                </td>
+                <td>
+                    @if (i.status == "1")
+                    {
+                        if (i.NewOrder == "Y")
+                        {
+                            <span>未同步</span>
+                        }
+                        else if (i.NewOrder == "N")
+                        {
+                            <span>已同步</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (i.status == "1")
+                    {
+                        if (i.IsPacked == "Y")
+                        {
+                            <span title="@i.PackedTime.ToString()">已打包</span>
+                        }
+                        else
+                        {
+                            <span>未打包</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (i.IsPacked == "Y")
+                    {
+                        if (i.IsCz == "Y")
+                        {
+                            <span title="@i.CzTime.ToString()">已称重</span>
+                        }
+                        else
+                        {
+                            <span>未称重</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (i.IsCz == "Y")
+                    {
+                        if (i.IsPayment == "Y")
+                        {
+                            <span>已扣款</span>
+                        }
+                        else
+                        {
+                            <span>未扣款</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (i.IsCz == "Y")
+                    {
+                        if (i.IsOutbound == "Y")
+                        {
+                            <span>已出库</span>
+                        }
+                        else
+                        {
+                            <span>未出库</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (i.IsOutbound == "Y")
+                    {
+                        if (i.slFlag == 4)
+                        {
+                            <span>已发货</span>
+                        }
+                        else
+                        {
+                            <span>未发货</span>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

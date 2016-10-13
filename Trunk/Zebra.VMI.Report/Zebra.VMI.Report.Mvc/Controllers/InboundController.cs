@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace Zebra.VMI.Report.Mvc.Controllers
 {
-    public class HomeController : Controller
+    public class InboundController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /Inbound/
 
         public ActionResult Index()
         {

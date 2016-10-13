@@ -13,7 +13,7 @@ namespace Zebra.VMI.Report.Dal
         public DataSet Get(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(@"SELECT TOP 1 [Id]
+            strSql.Append(@"SELECT [Id]
                                   ,[slCode]
                                   ,[shipTitle]
                                   ,[slArea]
