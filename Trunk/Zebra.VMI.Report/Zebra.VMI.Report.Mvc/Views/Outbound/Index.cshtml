@@ -3,6 +3,16 @@
     <li><a href="/">Home</a></li>
     <li class="active">出库查询</li>
 </ol>
+<form action="/Outbound/" method="post" id="searchForm">
+    <ol class="breadcrumb">
+        <div class="input-group col-lg-4">
+            <input type="text" name="shiptitle" class="form-control" placeholder="Search" aria-describedby="basic-addon2" value="@ViewBag.FilterModel.ShipTitle">
+            <span class="input-group-addon" id="basic-addon2">
+                <a href="#" onclick="document.getElementById('searchForm').submit();"><i class="glyphicon glyphicon-search"></i></a>
+            </span>
+        </div>
+    </ol>
+</form>
 <table class="table table-hover">
     <thead>
         <tr>

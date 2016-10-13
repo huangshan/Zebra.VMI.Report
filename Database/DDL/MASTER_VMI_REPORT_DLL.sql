@@ -1,3 +1,30 @@
+--入库报表
+IF NOT EXISTS ( select 'x'
+			from sys.tables st
+				inner join sys.schemas ss on st.schema_id = ss.schema_id
+			WHERE ss.name = 'dbo'
+			and st.name = 'VMI_InboundReport')	
+BEGIN
+PRINT 'CREATE TABLE VMI_InboundReport'
+CREATE TABLE VMI_InboundReport(
+	[Id] [varchar](50) NOT NULL,
+	[ref_value] varchar(50),
+	[partner] varchar(50),
+	[slArea] varchar(10),
+	[pin] varchar(50),
+	[receiveTime] datetime,
+	[ParseStatus] varchar(1),
+	PostFlux int,
+	SEFLAG int,
+	LotNo varchar(23),
+	AddTime datetime,
+ CONSTRAINT [PK_VMI_InboundReport] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
 --出库报表
 IF NOT EXISTS ( select 'x'
 			from sys.tables st
@@ -39,7 +66,4 @@ CREATE TABLE [VMI_OutboundReport](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
-
-
-
 GO

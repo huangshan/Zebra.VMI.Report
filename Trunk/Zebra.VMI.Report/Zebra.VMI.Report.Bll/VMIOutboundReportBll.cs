@@ -14,8 +14,30 @@ namespace Zebra.VMI.Report.Bll
     {
         public List<OutboundReport> GetByStartTime(DateTime startTime)
         {
-            VMIOutboundReportDal da = new VMIOutboundReportDal();
             string strWhere = "intodate > '"+startTime.ToString()+"'";
+            return Get(strWhere);
+        }
+
+        public List<OutboundReport> GetByShipTitle(string shipTitle)
+        {
+            string strWhere = "shipTitle = '" + shipTitle + "'";
+            return Get(strWhere);
+        }
+        
+        public void GetNewOrders()
+        {
+            VMIOutboundReportDal dal = new VMIOutboundReportDal();
+            dal.GetNewOrders();
+        }
+        public void UpdateReport()
+        {
+            VMIOutboundReportDal dal = new VMIOutboundReportDal();
+            dal.UpdateReport();
+        }
+
+        private List<OutboundReport> Get(string strWhere)
+        {
+            VMIOutboundReportDal da = new VMIOutboundReportDal();
             DataSet ds = da.Get(strWhere);
             if (ds == null || ds.Tables.Count == 0) return null;
             List<OutboundReport> list = new List<OutboundReport>();
@@ -26,16 +48,6 @@ namespace Zebra.VMI.Report.Bll
                 list.Add(entity);
             }
             return list;
-        }
-        public void GetNewOrders()
-        {
-            VMIOutboundReportDal dal = new VMIOutboundReportDal();
-            dal.GetNewOrders();
-        }
-        public void UpdateReport()
-        {
-            VMIOutboundReportDal dal = new VMIOutboundReportDal();
-            dal.UpdateReport();
         }
         private void GetEntity(OutboundReport entity, DataRow dr)
         {

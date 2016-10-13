@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Zebra.VMI.Report.Bll;
+using Zebra.VMI.Report.Common.Model;
 
 namespace Zebra.VMI.Report.Mvc.Controllers
 {
@@ -21,5 +22,18 @@ namespace Zebra.VMI.Report.Mvc.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index(FilterModel model)
+        {
+            VMIOutboundReportBll bll = new VMIOutboundReportBll();
+            DateTime now = DateTime.Now;
+            DateTime startTime = new DateTime(now.Year, now.Month, now.Day);
+            if (string.IsNullOrEmpty(model.ShipTitle))
+                ViewBag.Items = bll.GetByStartTime(startTime);
+            else
+                ViewBag.Items = bll.GetByShipTitle(model.ShipTitle);
+            ViewBag.FilterModel = model;
+            return View();
+        }
     }
 }
