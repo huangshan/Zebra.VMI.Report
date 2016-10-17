@@ -17,6 +17,7 @@ namespace Zebra.VMI.Report.Mvc.Controllers
         {
             VMIOutboundReportBll bll = new VMIOutboundReportBll();
             DateTime now = DateTime.Now;
+            now = now.AddDays(-10);
             DateTime startTime = new DateTime(now.Year, now.Month, now.Day);
             ViewBag.Items = bll.GetByStartTime(startTime);
             return View();
