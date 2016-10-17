@@ -20,6 +20,8 @@ namespace Zebra.VMI.Report.Mvc.Controllers
             now = now.AddDays(-10);
             DateTime startTime = new DateTime(now.Year, now.Month, now.Day);
             ViewBag.Items = bll.GetByStartTime(startTime);
+            FilterModel filter = new FilterModel();
+            ViewBag.FilterModel = filter;
             return View();
         }
 
