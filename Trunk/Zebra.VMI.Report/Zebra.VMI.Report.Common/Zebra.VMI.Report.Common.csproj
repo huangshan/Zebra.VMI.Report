@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ConfigMgr.cs" />
     <Compile Include="DbHelperSQL.cs" />
+    <Compile Include="Entities\InboundReport.cs" />
     <Compile Include="Entities\OutboundReport.cs" />
     <Compile Include="Enum\LogEnum.cs" />
     <Compile Include="Model\FilterModel.cs" />

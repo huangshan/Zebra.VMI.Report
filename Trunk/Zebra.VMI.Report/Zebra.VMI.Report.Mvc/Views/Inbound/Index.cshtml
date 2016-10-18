@@ -1,5 +1,79 @@
 ﻿@using Zebra.VMI.Report.Common
+@using Zebra.VMI.Report.Common.Entities
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li class="active">入库查询</li>
 </ol>
+<form action="/Inbound/" method="post" id="searchForm">
+    <ol class="breadcrumb">
+        <div class="input-group col-lg-4">
+            <input type="text" name="shiptitle" class="form-control" placeholder="Search" aria-describedby="basic-addon2" value="@ViewBag.FilterModel.ShipTitle">
+            <span class="input-group-addon" id="basic-addon2">
+                <a href="#" onclick="document.getElementById('searchForm').submit();"><i class="glyphicon glyphicon-search"></i></a>
+            </span>
+        </div>
+    </ol>
+</form>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>入库单号</th>
+            <th>客编</th>
+            <th>仓库</th>
+            <th>时间</th>
+            <th>接单状态</th>
+            <th>WMS同步</th>
+            <th>入库状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (InboundReport i in ViewBag.Items)
+        {
+            <tr>
+                <td>@i.ref_value</td>
+                <td>@i.partner</td>
+                <td>@i.slArea</td>
+                <td>@i.receiveTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>
+                    @if (i.ParseStatus == "Y")
+                    {<span>接单成功</span>}
+                    @if (i.ParseStatus == "N")
+                    {<span>接单失败</span>}
+                    @if (i.ParseStatus == "P")
+                    {<span>待接单</span>}
+                </td>
+                <td>
+                    @if (i.ParseStatus == "Y")
+                    {
+                        if (i.PostFlux == "1")
+                        {
+                            <span>已同步到WMS</span>
+                        }
+                        else
+                        {
+                            <span>未同步到WMS</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (i.ParseStatus == "Y")
+                    {
+                        if (i.SEFLAG == "0")
+                        {
+                            <span>未入库</span>
+                        }
+                        else if (i.SEFLAG == "2")
+                        {
+                            <span>入库已回传</span>
+                        }
+                        else if (i.SEFLAG == "1")
+                        {
+                            <span>已入库未回传</span>
+                        }
+                    }
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
