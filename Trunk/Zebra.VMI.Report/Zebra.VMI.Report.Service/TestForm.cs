@@ -21,6 +21,8 @@ namespace Zebra.VMI.Report.Service
         {
             Outbound outbound = new Outbound();
             outbound.Run();
+            Inbound inbound = new Inbound();
+            inbound.Run();
         }
     }
 }

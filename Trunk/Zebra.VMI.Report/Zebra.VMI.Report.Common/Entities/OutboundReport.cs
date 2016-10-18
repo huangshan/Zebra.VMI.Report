@@ -9,6 +9,10 @@ namespace Zebra.VMI.Report.Common
     public class OutboundReport
     {
         public string Id { get; set; }
+        public string RefValue { get; set; }
+        public DateTime ReceiveTime { get; set; }
+        public string ParseStatus { get; set; }
+        public int SendbackFlag { get; set; }
         public string slCode { get; set; }
         public string shipTitle { get; set; }
         public string slArea { get; set; }

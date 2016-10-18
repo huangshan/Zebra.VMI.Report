@@ -52,6 +52,10 @@ namespace Zebra.VMI.Report.Bll
         private void GetEntity(OutboundReport entity, DataRow dr)
         {
             entity.Id = dr["Id"].ToString();
+            entity.RefValue = dr["RefValue"].ToString();
+            entity.ReceiveTime = Convert.IsDBNull(dr["ReceiveTime"]) ? DateTime.MinValue : Convert.ToDateTime(dr["ReceiveTime"]); 
+            entity.ParseStatus = dr["ParseStatus"].ToString();
+            entity.SendbackFlag = Convert.IsDBNull(dr["SendbackFlag"]) ? 0 : Convert.ToInt32(dr["SendbackFlag"]); 
             entity.slCode = dr["slCode"].ToString();
             entity.shipTitle = dr["shipTitle"].ToString();
             entity.slArea = dr["slArea"].ToString();

@@ -35,6 +35,10 @@ BEGIN
 PRINT 'CREATE TABLE VMI_OutboundReport'
 CREATE TABLE [VMI_OutboundReport](
 	[Id] [varchar](50) NOT NULL,
+	RefValue varchar(23),
+	[ReceiveTime] datetime,
+	[ParseStatus] varchar(1),
+	SendbackFlag int,
 	[slCode] varchar(16),
 	[shipTitle] nvarchar(500),
 	[slArea] varchar(10),

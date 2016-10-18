@@ -22,7 +22,7 @@ namespace Zebra.VMI.Report.Service
             }
             catch (Exception ex)
             {
-                Logger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
+                DBLogger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Zebra.VMI.Report.Service
             }
             catch (Exception ex)
             {
-                Logger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
+                DBLogger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
             }
         }
         public void Stop()
@@ -65,7 +65,7 @@ namespace Zebra.VMI.Report.Service
             }
             catch (Exception ex)
             {
-                Logger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
+                DBLogger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
             }
         }
 
@@ -82,7 +82,7 @@ namespace Zebra.VMI.Report.Service
             }
             catch (Exception ex)
             {
-                Logger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
+                DBLogger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
             }
         }
 
@@ -92,13 +92,14 @@ namespace Zebra.VMI.Report.Service
             {
                 while (true)
                 {
-
+                    Inbound inbound = new Inbound();
+                    inbound.Run();
                     Thread.Sleep(Convert.ToInt32(_sleepTime) * 1000);
                 }
             }
             catch (Exception ex)
             {
-                Logger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
+                DBLogger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Error, ex);
             }
         }
     }

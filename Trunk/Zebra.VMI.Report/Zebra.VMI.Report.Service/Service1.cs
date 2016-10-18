@@ -24,14 +24,14 @@ namespace Zebra.VMI.Report.Service
         {
             if (_scheduler == null) _scheduler = new Scheduler();
             _scheduler.Start();
-            Logger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Info, "VMI Report Service started " + DateTime.Now);
+            DBLogger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Info, "VMI Report Service started " + DateTime.Now);
         }
 
         protected override void OnStop()
         {
             if (_scheduler != null)
                 _scheduler.Stop();
-            Logger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Info, "VMI Report Service stopped " + DateTime.Now);
+            DBLogger.Write("ZebraVmiReport", AppDomainName.ZebraVmiReport, EventCategory.Info, "VMI Report Service stopped " + DateTime.Now);
         }
     }
 }

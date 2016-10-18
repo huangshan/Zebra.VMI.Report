@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zebra.VMI.Report.Common.Entities
+namespace Zebra.VMI.Report.Common
 {
     public class InboundReport
     {

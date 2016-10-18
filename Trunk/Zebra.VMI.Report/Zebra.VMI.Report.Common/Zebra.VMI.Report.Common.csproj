@@ -43,10 +43,10 @@
     <Compile Include="ConfigMgr.cs" />
     <Compile Include="DbHelperSQL.cs" />
     <Compile Include="Entities\InboundReport.cs" />
+    <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\OutboundReport.cs" />
     <Compile Include="Enum\LogEnum.cs" />
     <Compile Include="Model\FilterModel.cs" />
-    <Compile Include="Model\OutboundModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

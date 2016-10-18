@@ -39,13 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logger.cs" />
+    <Compile Include="FileLogger.cs" />
+    <Compile Include="DBLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zebra.VMI.Report.Common\Zebra.VMI.Report.Common.csproj">
       <Project>{d15e16f3-bb4d-4a9e-acb8-162550967802}</Project>
       <Name>Zebra.VMI.Report.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zebra.VMI.Report.Dal\Zebra.VMI.Report.Dal.csproj">
+      <Project>{4209ec11-3c9a-48ad-8d31-dc36136e06a3}</Project>
+      <Name>Zebra.VMI.Report.Dal</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

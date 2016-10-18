@@ -39,12 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiStockOutDal.cs" />
-    <Compile Include="BUSIWayBillDal.cs" />
-    <Compile Include="OsShiplistDal.cs" />
-    <Compile Include="OsShiplistPreDal.cs" />
+    <Compile Include="LogDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BUSIWayBillStatusDal.cs" />
     <Compile Include="VMIInboundReportDal.cs" />
     <Compile Include="VMIOutboundReportDal.cs" />
   </ItemGroup>

@@ -14,6 +14,10 @@ namespace Zebra.VMI.Report.Dal
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"SELECT [Id]
+                                  ,[RefValue]
+                                  ,[ReceiveTime]
+                                  ,[ParseStatus]
+                                  ,[SendbackFlag]
                                   ,[slCode]
                                   ,[shipTitle]
                                   ,[slArea]

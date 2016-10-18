@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zebra.VMI.Report.Common.Entities;
+using Zebra.VMI.Report.Common;
 using Zebra.VMI.Report.Dal;
 
 namespace Zebra.VMI.Report.Bll

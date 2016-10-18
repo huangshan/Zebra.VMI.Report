@@ -1,5 +1,5 @@
-IF  EXISTS (SELECT * FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[GetNewInboundOrders]') AND TYPE IN (N'P', N'PC'))
-DROP PROCEDURE [GetNewInboundOrders]
+IF  EXISTS (SELECT * FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[GETNEWINBOUNDORDERS]') AND TYPE IN (N'P', N'PC'))
+DROP PROCEDURE [GETNEWINBOUNDORDERS]
 GO
 
 SET ANSI_NULLS ON
@@ -23,26 +23,28 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE GetNewInboundOrders
+CREATE PROCEDURE GETNEWINBOUNDORDERS
 AS					   
 BEGIN
 	SET NOCOUNT ON;
 	DECLARE
 	@STARTTIME DATETIME = DATEADD(DAY, -1, GETDATE());
-	select top 1 @STARTTIME=receiveTime from VMI_InboundReport where receiveTime>@STARTTIME order by receiveTime desc;
+	SELECT TOP 1 @STARTTIME=RECEIVETIME FROM VMI_INBOUNDREPORT ORDER BY RECEIVETIME DESC;
 
-	insert into VMI_InboundReport (id, ref_value, partner, slArea, pin, receiveTime, ParseStatus, PostFlux, SEFLAG, LotNo, addtime) 
+	INSERT INTO VMI_INBOUNDREPORT (ID, REF_VALUE, PARTNER, SLAREA, PIN, RECEIVETIME, PARSESTATUS, POSTFLUX, SEFLAG, LOTNO, ADDTIME) 
 
-	select REPLACE (newid(), '-' , ''), a.ref_value, a.partner, b.sgarea, a.pin, a.receiveTime
-	, c.status, b.PostFlux, b.seflag, b.LotNo, getdate()
-	from api_basreceivejob a
-	left join osshipnotice b on(a.ref_value=b.lotno)
-	left join VMI_MessageParseRecord c on(a.jobid=c.jobid)
-	where a.receiveTime>@STARTTIME
-	and a.partner in ('CSC44453', 'CSC40467') UNION all
-	select REPLACE (newid(), '-' , ''), lotno, sucode, sgarea, '', opTime
-	, '', PostFlux, seflag, LotNo, getdate()
-	from osshipnotice
-	where opTime>@STARTTIME and sucode not in ('CSC44453', 'CSC40467')
+	SELECT REPLACE (NEWID(), '-' , ''), A.REF_VALUE, A.PARTNER, B.SGAREA, A.PIN, A.RECEIVETIME
+	, C.STATUS, B.POSTFLUX, B.SEFLAG, B.LOTNO, GETDATE()
+	FROM API_BASRECEIVEJOB A WITH(NOLOCK)
+	LEFT JOIN OSSHIPNOTICE B WITH(NOLOCK) ON(A.REF_VALUE=B.LOTNO)
+	LEFT JOIN VMI_MESSAGEPARSERECORD C WITH(NOLOCK) ON(A.JOBID=C.JOBID)
+	WHERE A.RECEIVETIME>@STARTTIME
+	AND A.PARTNER IN ('CSC44453', 'CSC40467')
+	AND A.TABLE_NAME IN ('WMS_STOCK_IN_ORDER_NOTIFY', 'LOGISTICS_SKU_STOCKIN_INFO')
+	UNION ALL
+	SELECT REPLACE (NEWID(), '-' , ''), LOTNO, SUCODE, SGAREA, '', OPTIME
+	, '', POSTFLUX, SEFLAG, LOTNO, GETDATE()
+	FROM OSSHIPNOTICE WITH(NOLOCK)
+	WHERE OPTIME>@STARTTIME AND SUCODE NOT IN ('CSC44453', 'CSC40467')
 END;
 GO
