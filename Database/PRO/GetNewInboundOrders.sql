@@ -31,8 +31,7 @@ BEGIN
 	@STARTTIME DATETIME = DATEADD(DAY, -1, GETDATE());
 	select top 1 @STARTTIME=receiveTime from VMI_InboundReport where receiveTime>@STARTTIME order by receiveTime desc;
 
-	insert into VMI_InboundReport (id, ref_value, partner, slArea, pin, receiveTime
-	, ParseStatus, PostFlux, SEFLAG, LotNo, addtime) 
+	insert into VMI_InboundReport (id, ref_value, partner, slArea, pin, receiveTime, ParseStatus, PostFlux, SEFLAG, LotNo, addtime) 
 
 	select REPLACE (newid(), '-' , ''), a.ref_value, a.partner, b.sgarea, a.pin, a.receiveTime
 	, c.status, b.PostFlux, b.seflag, b.LotNo, getdate()
@@ -40,5 +39,10 @@ BEGIN
 	left join osshipnotice b on(a.ref_value=b.lotno)
 	left join VMI_MessageParseRecord c on(a.jobid=c.jobid)
 	where a.receiveTime>@STARTTIME
+	and a.partner in ('CSC44453', 'CSC40467') UNION all
+	select REPLACE (newid(), '-' , ''), lotno, sucode, sgarea, '', opTime
+	, '', PostFlux, seflag, LotNo, getdate()
+	from osshipnotice
+	where opTime>@STARTTIME and sucode not in ('CSC44453', 'CSC40467')
 END;
 GO
