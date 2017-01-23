@@ -22,6 +22,9 @@ namespace Zebra.VMI.Report.Mvc.Controllers
             ViewBag.Items = bll.GetDefaultList(defTopCount);
 
             FilterModel filter = new FilterModel();
+            var dt = DateTime.Now;
+            filter.StartTime = dt.AddDays(-1);
+            filter.EndTime = dt;
             ViewBag.FilterModel = filter;
             return View();
         }

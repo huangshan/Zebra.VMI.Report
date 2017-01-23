@@ -15,19 +15,23 @@ namespace Zebra.VMI.Report.Bll
             StringBuilder strWhere = new StringBuilder();
             if (!string.IsNullOrEmpty(model.SKU))
                 strWhere.Append("sgcode='" + model.SKU + "'");
-            if (model.StartTime != DateTime.MinValue)
+            if (!string.IsNullOrEmpty(model.SuCode))
             {
                 if (!string.IsNullOrEmpty(strWhere.ToString()))
-                    strWhere.Append(" and OPTIME>='" + model.StartTime + "'");
-                else
-                    strWhere.Append(" OPTIME>='" + model.StartTime + "'");
+                    strWhere.Append(" and");
+                strWhere.Append(" SUCODE='" + model.SuCode + "'");
+            }
+                if (model.StartTime != DateTime.MinValue)
+            {
+                if (!string.IsNullOrEmpty(strWhere.ToString()))
+                    strWhere.Append(" and");
+                strWhere.Append(" OPTIME>='" + model.StartTime + "'");
             }
             if (model.EndTime != DateTime.MinValue)
             {
                 if (!string.IsNullOrEmpty(strWhere.ToString()))
-                    strWhere.Append(" and OPTIME<='" + model.EndTime + "'");
-                else
-                    strWhere.Append(" OPTIME<='" + model.EndTime + "'");
+                    strWhere.Append(" and");
+                strWhere.Append(" OPTIME<='" + model.EndTime + "'");
             }
             if (string.IsNullOrEmpty(strWhere.ToString()))
                 return GetDefaultList(topCount);

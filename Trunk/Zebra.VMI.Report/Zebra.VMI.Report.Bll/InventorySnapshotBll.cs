@@ -20,16 +20,14 @@ namespace Zebra.VMI.Report.Bll
             if (model.StartTime != DateTime.MinValue)
             {
                 if (!string.IsNullOrEmpty(strWhere.ToString()))
-                    strWhere.Append(" and modifiedTime>='" + model.StartTime + "'");
-                else
-                    strWhere.Append(" modifiedTime>='" + model.StartTime + "'");
+                    strWhere.Append(" and");
+                strWhere.Append(" modifiedTime>='" + model.StartTime + "'");
             }
             if (model.EndTime != DateTime.MinValue)
             {
                 if (!string.IsNullOrEmpty(strWhere.ToString()))
-                    strWhere.Append(" and modifiedTime<='" + model.EndTime + "'");
-                else
-                    strWhere.Append(" modifiedTime<='" + model.EndTime + "'");
+                    strWhere.Append(" and");
+                strWhere.Append(" modifiedTime<='" + model.EndTime + "'");
             }
             if (string.IsNullOrEmpty(strWhere.ToString()))
                 return GetDefaultList(topCount);
