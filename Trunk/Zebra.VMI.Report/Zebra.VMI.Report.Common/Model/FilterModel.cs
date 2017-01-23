@@ -10,7 +10,10 @@ namespace Zebra.VMI.Report.Common.Model
     {
         public string ShipTitle { get; set; }
         public string SuCode { get; set; }
+        public string SKU { get; set; }
         public string AreaCode { get; set; }
         public DateTime OrderTime { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

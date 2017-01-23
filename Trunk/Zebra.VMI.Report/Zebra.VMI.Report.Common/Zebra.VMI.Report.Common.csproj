@@ -43,6 +43,8 @@
     <Compile Include="ConfigMgr.cs" />
     <Compile Include="DbHelperSQL.cs" />
     <Compile Include="Entities\InboundReport.cs" />
+    <Compile Include="Entities\InventoryChange.cs" />
+    <Compile Include="Entities\InventorySnapshot.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\OutboundReport.cs" />
     <Compile Include="Enum\LogEnum.cs" />

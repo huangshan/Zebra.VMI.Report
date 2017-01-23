@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InventoryChangeDal.cs" />
+    <Compile Include="InventorySnapshotDal.cs" />
     <Compile Include="LogDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VMIInboundReportDal.cs" />

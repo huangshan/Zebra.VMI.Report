@@ -1,0 +1,73 @@
+﻿@using Zebra.VMI.Report.Common
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active">WMS台账</li>
+</ol>
+
+    <ol class="breadcrumb">
+        <form action="/WMS/" method="post" class="form-inline" id="searchForm">
+            <div class="form-group">
+                <label>SKU</label>
+                <input type="text" class="form-control" placeholder="SKU" name="SKU"  value="@ViewBag.FilterModel.SKU">
+            </div>
+            <div class="form-group">
+                <label>开始</label>
+                <input type="text" class="form-control" placeholder="2017-01-01" name="StartTime" value="@ViewBag.FilterModel.StartTime.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="form-group">
+                <label>结束</label>
+                <input type="text" class="form-control" placeholder="2017-01-01" name="EndTime" value="@ViewBag.FilterModel.EndTime.ToString("yyyy-MM-dd")">
+            </div>
+            <button type="submit" class="btn btn-default">查 询</button>
+        </form>
+</ol>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>客编</th>
+            <th>仓库</th>
+            <th>正次品</th>
+            <th>批次号</th>
+            <th>台账时间</th>
+            <th>WMS库存</th>
+            <th>VMI库存</th>
+            <th>库存差异</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (InventoryChange i in ViewBag.Items)
+        {
+                    <tr>
+                    <td>@i.SgCode</td>
+                    <td>@i.SuCode</td>
+                    <td>@i.SgArea</td>
+                    <td>
+                        @if (i.SgStatus == "0")
+                    {
+                            <span>正品</span>
+                        }
+                        else
+                        {
+                            <span>次品</span>
+                        }
+                    </td>
+                    <td>@i.BatchNo</td>
+                    <td>@i.OpTime.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@i.RemainQty</td>
+                    <td>@i.ORemainQty</td>
+                    <td>
+                        @if (i.RemainQty - i.ORemainQty != 0)
+                    {
+                            <span class="text-danger">@(i.RemainQty - i.ORemainQty)</span>
+                        }
+                        else
+                        {
+                            <span>--</span>
+                        }
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
